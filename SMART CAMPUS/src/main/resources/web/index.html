@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> Smart Campus Management System</title>
+  <!-- Google Fonts for Academic Elegance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- CAMPUS Navigation Header -->
+  <header class="sc-header">
+    <div class="header-container">
+      <div class="brand-wrapper">
+        <img src="logo.svg" alt="KQU Crest" class="brand-logo">
+        <div class="brand-text">
+          <h1>SMART CAMPUS</h1>
+          <span class="motto">Excellence • Integrity • Wisdom • Est. 1968</span>
+        </div>
+      </div>
+
+      <div class="nav-controls">
+        <div id="role-display" class="role-badge">ADMINISTRATOR</div>
+        <div class="user-info">
+          <span id="user-name-display" class="user-name">Dr. Arthur Pendelton</span>
+          <span id="user-id-display" style="font-size: 0.75rem; color: #CBD5E1;">admin@kqu.ac.ug</span>
+        </div>
+        <button id="btn-login-logout" class="btn btn-outline">Switch User</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Interactive Role Bar & System Status -->
+  <div class="demo-role-bar">
+    <div class="demo-role-container">
+      <div class="role-switcher">
+        <span style="font-weight: 600; color: #FFFFFF; margin-right: 0.25rem;">Active Portal:</span>
+        <button class="role-btn active" data-role="ADMIN">Admin Hub</button>
+        <button class="role-btn" data-role="LECTURER">Lecturer Portal</button>
+        <button class="role-btn" data-role="STUDENT">Student Portal</button>
+      </div>
+
+      <div class="backend-indicator">
+        <span class="indicator-dot" id="server-dot"></span>
+        <span id="server-status-text">Web Server & SQLite Database Active</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Application Body -->
+  <main class="main-content">
+
+    <!-- =============================================
+         VIEW 1: ADMINISTRATOR CONTROL HUB
+         ============================================== -->
+    <section id="admin-view" class="view-section active">
+      <!-- 4 Stat Summary Cards -->
+      <div class="stats-grid">
+        <div class="stat-card gold">
+          <div class="stat-header">
+            <span class="stat-title">Enrolled Students</span>
+            <span class="stat-icon">🎓</span>
+          </div>
+          <div class="stat-value" id="stat-students">500</div>
+          <div class="stat-footer">Across all 8 academic faculties</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-header">
+            <span class="stat-title">Academic Staff</span>
+            <span class="stat-icon">🏛️</span>
+          </div>
+          <div class="stat-value" id="stat-lecturers">20</div>
+          <div class="stat-footer">Professors, Senior Lecturers & Deans</div>
+        </div>
+
+        <div class="stat-card success">
+          <div class="stat-header">
+            <span class="stat-title">Average Attendance</span>
+            <span class="stat-icon">📊</span>
+          </div>
+          <div class="stat-value">88.4%</div>
+          <div class="stat-footer">Senate threshold: 75.0% mandatory</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-header">
+            <span class="stat-title">Faculties & Programs</span>
+            <span class="stat-icon">📚</span>
+          </div>
+          <div class="stat-value">8 / 24</div>
+          <div class="stat-footer">Undergraduate & Graduate programs</div>
+        </div>
+      </div>
+
+      <!-- Student Registry Table Card -->
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">
+            <span>📋</span> Student Academic Registry
+          </h2>
+          <button id="btn-open-register-modal" class="btn btn-gold">+ Register New Student</button>
+        </div>
+
+        <div class="card-body">
+          <div class="filter-bar">
+            <input type="text" id="admin-search-input" class="search-input" placeholder="Search by Registration No (e.g. KQU/2024/001) or Name...">
+            <select id="admin-faculty-filter" class="select-dropdown">
+              <option value="ALL">All Academic Faculties</option>
+              <option value="Faculty of Science & Technology">Faculty of Science & Technology</option>
+              <option value="Faculty of Business & Management">Faculty of Business & Management</option>
+              <option value="Faculty of Law">Faculty of Law</option>
+              <option value="Faculty of Health Sciences">Faculty of Health Sciences</option>
+              <option value="Faculty of Engineering">Faculty of Engineering</option>
+            </select>
+          </div>
+
+          <div class="table-responsive">
+            <table class="kqu-table">
+              <thead>
+                <tr>
+                  <th>Reg. Number</th>
+                  <th>Student Full Name</th>
+                  <th>Faculty & Course</th>
+                  <th>Year</th>
+                  <th>CGPA / 5.0</th>
+                  <th>Attendance</th>
+                  <th>Exam Status</th>
+                </tr>
+              </thead>
+              <tbody id="admin-students-tbody">
+                <!-- Dynamically Populated by JavaScript -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         VIEW 2: LECTURER PORTAL (ATTENDANCE & GRADING)
+         ===================================================== -->
+    <section id="lecturer-view" class="view-section">
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">
+            <span>👨‍🏫</span> Faculty Teaching Workspace
+          </h2>
+          <div style="display: flex; gap: 0.5rem; align-items: center;">
+            <label for="lecturer-unit-select" style="font-size: 0.8rem; font-weight: 600;">Course Unit:</label>
+            <select id="lecturer-unit-select" class="select-dropdown">
+              <option value="CSC1101">CSC1101: Computer Architecture & Organization</option>
+              <option value="SWE2101">SWE2101: Systems Analysis & Design</option>
+              <option value="CSC3105">CSC3105: Artificial Intelligence & Expert Systems</option>
+              <option value="MTH1102">MTH1102: Discrete Mathematics</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="card-body">
+          <!-- Session Header info -->
+          <div style="background-color: #F8FAFC; border: 1px solid var(--kqu-border); border-radius: var(--radius-sm); padding: 0.85rem; margin-bottom: 1.25rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem;">
+            <div>
+              <strong style="color: var(--kqu-royal-blue);">Lecture Session:</strong> Week 7 - Object-Oriented Principles & Design Patterns
+            </div>
+            <div style="font-size: 0.8rem; color: var(--kqu-text-muted);">
+              Date: <span id="current-session-date">Today</span> | Hall: Main Science Theatre 2
+            </div>
+            <div class="badge badge-warning">
+              Senate Policy: 75% Attendance Required For Exams
+            </div>
+          </div>
+
+          <!-- Attendance Register Table -->
+          <h3 style="font-size: 0.95rem; font-weight: 700; color: var(--kqu-royal-blue); margin-bottom: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em;">
+            1. Daily Session Attendance Register
+          </h3>
+          <div class="table-responsive" style="margin-bottom: 2rem;">
+            <table class="kqu-table">
+              <thead>
+                <tr>
+                  <th>Reg. Number</th>
+                  <th>Student Name</th>
+                  <th>Sessions Attended</th>
+                  <th>Attendance %</th>
+                  <th>75% Clearance</th>
+                  <th>Mark Today's Status</th>
+                </tr>
+              </thead>
+              <tbody id="lecturer-attendance-tbody">
+                <!-- Dynamically Populated by JavaScript -->
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Continuous Assessment & Examination Marks Sheet -->
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+            <h3 style="font-size: 0.95rem; font-weight: 700; color: var(--kqu-royal-blue); text-transform: uppercase; letter-spacing: 0.05em;">
+              2. Continuous Assessment & Final Examination Sheet
+            </h3>
+            <button id="btn-save-grades" class="btn btn-gold">Submit to Senate Board</button>
+          </div>
+          <div class="table-responsive">
+            <table class="kqu-table">
+              <thead>
+                <tr>
+                  <th>Reg. Number</th>
+                  <th>Student Name</th>
+                  <th>Coursework (/40)</th>
+                  <th>Final Exam (/60)</th>
+                  <th>Total (/100)</th>
+                  <th>Letter Grade</th>
+                  <th>Grade Point (5.0)</th>
+                </tr>
+              </thead>
+              <tbody id="lecturer-grading-tbody">
+                <!-- Dynamically Populated by JavaScript -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =================================================
+         VIEW 3: STUDENT PORTAL & OFFICIAL TRANSCRIPT
+         ================================================= -->
+    <section id="student-view" class="view-section">
+      <!-- Digital Student ID Card -->
+      <div class="student-id-card">
+        <div class="student-info-block">
+          <div class="student-avatar" id="student-avatar-initials">SM</div>
+          <div class="student-meta">
+            <h2 id="student-name-header">Samuel Mukasa</h2>
+            <div class="student-reg" id="student-reg-header">KQU/2024/001</div>
+            <div style="font-size: 0.85rem; color: #E2E8F0; margin-top: 0.25rem;" id="student-course-header">
+              Bachelor of Science in Computer Science
+            </div>
+            <div style="font-size: 0.75rem; color: #CBD5E1;" id="student-faculty-header">
+              Faculty of Science and Technology • Year 1 Semester 1
+            </div>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;">
+          <div class="cgpa-pill">
+            <div class="label">Cumulative GPA</div>
+            <div class="score" id="student-cgpa-val">4.62</div>
+            <div style="font-size: 0.75rem; color: var(--kqu-imperial-gold); font-weight: 700;" id="student-honours-val">
+              FIRST CLASS HONOURS
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Printable Official Academic Transcript -->
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">
+            <span>📜</span> Official Academic Transcript
+          </h2>
+          <button id="btn-print-transcript" class="btn btn-primary">🖨️ Print Official Transcript</button>
+        </div>
+
+        <div class="card-body">
+          <div class="transcript-document">
+            <!-- Transcript Header with Crest -->
+            <div class="transcript-header">
+              <img src="logo.svg" alt="University Crest" class="trans-logo">
+              <h2>SMART CAMPUS</h2>
+              <div class="sub-dept">OFFICE OF THE ACADEMIC REGISTRAR • SENATE HOUSE</div>
+              <div class="doc-title">OFFICIAL UNDERGRADUATE ACADEMIC TRANSCRIPT</div>
+            </div>
+
+            <!-- Student Bio Details -->
+            <div class="student-bio-grid">
+              <div class="bio-item">
+                <span class="bio-label">STUDENT NAME:</span>
+                <span class="bio-value" id="trans-name">SAMUEL MUKASA</span>
+              </div>
+              <div class="bio-item">
+                <span class="bio-label">REGISTRATION NO:</span>
+                <span class="bio-value" id="trans-reg">KQU/2024/001</span>
+              </div>
+              <div class="bio-item">
+                <span class="bio-label">ACADEMIC PROGRAM:</span>
+                <span class="bio-value" id="trans-course">B.Sc. Computer Science</span>
+              </div>
+              <div class="bio-item">
+                <span class="bio-label">FACULTY:</span>
+                <span class="bio-value" id="trans-faculty">Science and Technology</span>
+              </div>
+              <div class="bio-item">
+                <span class="bio-label">ACADEMIC YEAR:</span>
+                <span class="bio-value">2024/2025</span>
+              </div>
+              <div class="bio-item">
+                <span class="bio-label">EXAMINATION CLEARANCE:</span>
+                <span class="bio-value" id="trans-clearance" style="color: var(--kqu-success);">CLEARED (92% ATTENDANCE)</span>
+              </div>
+            </div>
+
+            <!-- Grade Breakdown Table -->
+            <table class="kqu-table" style="margin-bottom: 1.5rem;">
+              <thead>
+                <tr>
+                  <th>Course Code</th>
+                  <th>Course Unit Title</th>
+                  <th>Credit Units</th>
+                  <th>Coursework (/40)</th>
+                  <th>Exam (/60)</th>
+                  <th>Total (/100)</th>
+                  <th>Grade</th>
+                  <th>Grade Point</th>
+                </tr>
+              </thead>
+              <tbody id="transcript-tbody">
+                <!-- Dynamically Populated by JavaScript -->
+              </tbody>
+            </table>
+
+            <!-- Summary CGPA Section -->
+            <div style="background-color: #F8FAFC; border: 1px solid #CBD5E1; border-radius: var(--radius-sm); padding: 1rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+              <div>
+                <span style="font-size: 0.8rem; color: var(--kqu-text-muted); text-transform: uppercase;">Overall Cumulative GPA:</span>
+                <span style="font-size: 1.4rem; font-weight: 800; color: var(--kqu-royal-blue); margin-left: 0.5rem;" id="trans-cgpa">4.62 / 5.00</span>
+              </div>
+              <div>
+                <span style="font-size: 0.8rem; color: var(--kqu-text-muted); text-transform: uppercase;">Award Classification:</span>
+                <span style="font-size: 1rem; font-weight: 700; color: var(--kqu-imperial-gold); margin-left: 0.5rem;" id="trans-honours">FIRST CLASS HONOURS</span>
+              </div>
+            </div>
+
+            <!-- Registrar Verification Signatures -->
+            <div class="transcript-signatures">
+              <div class="sig-block">
+                <div class="sig-line"></div>
+                <div class="sig-label">Dean of Faculty</div>
+              </div>
+              <div class="sig-block" style="border: 2px solid var(--kqu-imperial-gold); padding: 0.5rem; border-radius: 50%; width: 90px; height: 90px; display: flex; align-items: center; justify-content: center; font-size: 0.65rem; color: var(--kqu-imperial-gold); font-weight: 800; text-align: center; text-transform: uppercase;">
+                Official<br>University<br>Seal
+              </div>
+              <div class="sig-block">
+                <div class="sig-line"></div>
+                <div class="sig-label">Academic Registrar</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ======================================
+       MODAL 1: REGISTER NEW STUDENT
+       ====================================== -->
+  <div id="modal-register-student" class="modal-overlay">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3>Register New Campus Student</h3>
+        <button class="modal-close" data-close="modal-register-student">&times;</button>
+      </div>
+      <form id="form-register-student">
+        <div class="modal-body">
+          <div class="form-group">
+            <label class="form-label" for="reg-fullname">Full Name:</label>
+            <input type="text" id="reg-fullname" class="form-control" placeholder="e.g. Brenda Nabirye" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="reg-email">Email Address:</label>
+            <input type="email" id="reg-email" class="form-control" placeholder="e.g. b.nabirye@kqu.ac.ug" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="reg-faculty">Academic Faculty:</label>
+            <select id="reg-faculty" class="form-control">
+              <option value="Faculty of Science & Technology">Faculty of Science & Technology</option>
+              <option value="Faculty of Business & Management">Faculty of Business & Management</option>
+              <option value="Faculty of Law">Faculty of Law</option>
+              <option value="Faculty of Health Sciences">Faculty of Health Sciences</option>
+              <option value="Faculty of Engineering">Faculty of Engineering</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="reg-course">Academic Course / Program:</label>
+            <select id="reg-course" class="form-control">
+              <option value="B.Sc. Computer Science">B.Sc. Computer Science</option>
+              <option value="B.Sc. Software Engineering">B.Sc. Software Engineering</option>
+              <option value="Bachelor of Laws (LL.B)">Bachelor of Laws (LL.B)</option>
+              <option value="Bachelor of Business Administration">Bachelor of Business Administration</option>
+              <option value="Bachelor of Medicine and Surgery (MBChB)">Bachelor of Medicine and Surgery (MBChB)</option>
+            </select>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary modal-close" data-close="modal-register-student">Cancel</button>
+          <button type="submit" class="btn btn-gold">Register Student</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <!-- Footer -->
+  <footer class="kqu-footer">
+    <div class="footer-container">
+      <div>
+        <strong>King's and Queen's University</strong> • Office of Academic Registrar & Information Systems
+      </div>
+      <div>
+        Full Stack Architecture: HTML5 + CSS3 + Vanilla JS + Java SE + SQLite Database
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

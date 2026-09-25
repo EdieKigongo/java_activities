@@ -1,0 +1,59 @@
+/* ==========================================================================
+   King's and Queen's University (KQU) - Academic Theme Stylesheet
+   Palette: Royal Blue, Gold, Cream, Black
+   ======================================================================= */
+
+:root {
+  --kqu-royal-blue: #0f5722;
+  --kqu-royal-blue-dark: #2d2f34;
+  --kqu-royal-blue-light: #1B3B6F;
+  --kqu-gold: #122a94;
+  --kqu-gold-dark: #B8860B;
+  --kqu-gold-light: #F3E5AB;
+  --kqu-cream: #413f3c;
+  --kqu-cream-light: #FFFDF0;
+  --kqu-cream-border: #c9e2e5;
+  --kqu-black: #0B0F19;
+  --kqu-black-muted: #3b1e1e;
+  --kqu-text-muted: #64748B;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--kqu-cream);
+  color: var(--kqu-black);
+  margin: 0;
+  padding: 0;
+}
+
+.kqu-header {
+  background-color: var(--kqu-royal-blue);
+  color: var(--kqu-gold);
+  padding: 1.25rem 2rem;
+  border-bottom: 3px solid var(--kqu-gold);
+}
+
+.kqu-btn-primary {
+  background-color: var(--kqu-royal-blue);
+  color: var(--kqu-gold);
+  border: 1px solid var(--kqu-gold);
+  padding: 0.5rem 1.25rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.kqu-btn-gold {
+  background-color: var(--kqu-gold);
+  color: var(--kqu-royal-blue-dark);
+  border: 1px solid var(--kqu-gold-dark);
+  padding: 0.5rem 1.25rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.kqu-card {
+  background-color: var(--kqu-cream-light);
+  border: 1px solid var(--kqu-cream-border);
+  border-radius: 8px;
+  padding: 1.5rem;
+}

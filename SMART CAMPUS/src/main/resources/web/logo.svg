@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+  <defs>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F3E7C4" />
+      <stop offset="50%" stop-color="#D4AF37" />
+      <stop offset="100%" stop-color="#AA820A" />
+    </linearGradient>
+    <linearGradient id="blueGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1E3A8A" />
+      <stop offset="100%" stop-color="#0F2557" />
+    </linearGradient>
+  </defs>
+  <!-- Shield Background -->
+  <path d="M50 5 C75 5, 90 20, 90 45 C90 75, 50 95, 50 95 C50 95, 10 75, 10 45 C10 20, 25 5, 50 5 Z" fill="url(#blueGrad)" stroke="url(#goldGrad)" stroke-width="3"/>
+  <!-- Inner Border -->
+  <path d="M50 11 C71 11, 84 23, 84 45 C84 70, 50 87, 50 87 C50 87, 16 70, 16 45 C16 23, 29 11, 50 11 Z" fill="none" stroke="#D4AF37" stroke-width="1" stroke-dasharray="2,2"/>
+  <!-- Royal Crown -->
+  <path d="M32 30 L38 22 L50 28 L62 22 L68 30 L66 38 L34 38 Z" fill="url(#goldGrad)" stroke="#8C6B08" stroke-width="1"/>
+  <circle cx="38" cy="21" r="2" fill="#FAF7EE"/>
+  <circle cx="50" cy="27" r="2.5" fill="#FAF7EE"/>
+  <circle cx="62" cy="21" r="2" fill="#FAF7EE"/>
+  <!-- Open Book of Wisdom -->
+  <path d="M26 50 C36 46, 47 48, 50 52 C53 48, 64 46, 74 50 L74 68 C64 64, 53 66, 50 70 C47 66, 36 64, 26 68 Z" fill="#FAF7EE" stroke="#0F2557" stroke-width="1.5"/>
+  <line x1="50" y1="52" x2="50" y2="70" stroke="#0F2557" stroke-width="2"/>
+  <!-- Text KQU -->
+  <text x="50" y="81" font-family="'Times New Roman', serif" font-size="9" font-weight="bold" fill="url(#goldGrad)" text-anchor="middle" letter-spacing="1">KQU</text>
+</svg>

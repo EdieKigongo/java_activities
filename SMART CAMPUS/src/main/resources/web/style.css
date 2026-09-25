@@ -1,0 +1,1148 @@
+/* ==========================================================================
+   KING'S AND QUEEN'S UNIVERSITY (KQU) - SMART CAMPUS MANAGEMENT SYSTEM
+   Web Edition: HTML5 + CSS3 + Vanilla JavaScript + Java SE + SQLite
+   ========================================================================== */
+
+:root {
+  --kqu-royal-blue: #570f23;
+  --kqu-royal-blue-light: #1D3D7A;
+  --kqu-royal-blue-dark: #0A193B;
+  --kqu-imperial-gold: #D4AF37;
+  --kqu-gold-hover: #AA820A;
+  --kqu-gold-soft: #FBF6E9;
+  --kqu-cream-bg: #F8F9FA;
+  --kqu-obsidian: #0B0F19;
+  --kqu-text-main: #1E293B;
+  --kqu-text-muted: #64748B;
+  --kqu-border: #E2E8F0;
+  --kqu-card-bg: #FFFFFF;
+  --kqu-success: #15803D;
+  --kqu-success-bg: #60950b;
+  --kqu-danger: #B91C1C;
+  --kqu-danger-bg: #FEE2E2;
+  --kqu-warning: #B45309;
+  --kqu-warning-bg: #FEF3C7;
+  --font-heading: 'Cinzel', 'Times New Roman', Georgia, serif;
+  --font-body: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--kqu-cream-bg);
+  color: var(--kqu-text-main);
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ==========================================================================
+   Header & Top Navigation
+   ========================================================================== */
+.kqu-header {
+  background: linear-gradient(135deg, var(--kqu-royal-blue-dark) 0%, var(--kqu-royal-blue) 100%);
+  color: #FFFFFF;
+  border-bottom: 3px solid var(--kqu-imperial-gold);
+  padding: 0.75rem 1.5rem;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: var(--shadow-md);
+}
+
+.header-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.brand-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  text-decoration: none;
+  color: inherit;
+}
+
+.brand-logo {
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+}
+
+.brand-text h1 {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  letter-spacing: 0.05em;
+  color: #FFFFFF;
+  font-weight: 700;
+}
+
+.brand-text .motto {
+  font-size: 0.25rem;
+  color: var(--kqu-imperial-gold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.nav-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.role-badge {
+  background: rgba(212, 175, 55, 0.15);
+  border: 1px solid var(--kqu-imperial-gold);
+  color: var(--kqu-imperial-gold);
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.role-badge::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  background-color: var(--kqu-imperial-gold);
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  font-size: 0.8rem;
+}
+
+.user-name {
+  font-weight: 600;
+  color: #FFFFFF;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 0.45rem 0.9rem;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: none;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.btn-gold {
+  background: linear-gradient(135deg, var(--kqu-imperial-gold) 0%, #B88E18 100%);
+  color: var(--kqu-obsidian);
+  box-shadow: 0 2px 4px rgba(212, 175, 55, 0.3);
+}
+
+.btn-gold:hover {
+  background: linear-gradient(135deg, #E2C052 0%, var(--kqu-imperial-gold) 100%);
+  transform: translateY(-1px);
+}
+
+.btn-outline {
+  background: transparent;
+  color: #FFFFFF;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.btn-outline:hover {
+  border-color: #FFFFFF;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.btn-primary {
+  background-color: var(--kqu-royal-blue);
+  color: #FFFFFF;
+}
+
+.btn-primary:hover {
+  background-color: var(--kqu-royal-blue-light);
+}
+
+.btn-secondary {
+  background-color: #F1F5F9;
+  color: var(--kqu-text-main);
+  border: 1px solid var(--kqu-border);
+}
+
+.btn-secondary:hover {
+  background-color: #E2E8F0;
+}
+
+/* Role Switcher Pills Bar */
+.demo-role-bar {
+  background-color: var(--kqu-obsidian);
+  color: #94A3B8;
+  padding: 0.5rem 1.5rem;
+  font-size: 0.8rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.demo-role-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.role-switcher {
+  display: flex;
+  gap: 0.4rem;
+  align-items: center;
+}
+
+.role-btn {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #E2E8F0;
+  padding: 0.25rem 0.65rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.75rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.role-btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+  color: #FFFFFF;
+}
+
+.role-btn.active {
+  background: var(--kqu-imperial-gold);
+  color: var(--kqu-obsidian);
+  border-color: var(--kqu-imperial-gold);
+  font-weight: 700;
+}
+
+.backend-indicator {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.75rem;
+}
+
+.indicator-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #10B981;
+}
+
+/* ==========================================================================
+   Main Content Layout
+   ========================================================================== */
+.main-content {
+  flex: 1;
+  max-width: 1400px;
+  width: 100%;
+  margin: 1.5rem auto;
+  padding: 0 1.5rem;
+}
+
+.view-section {
+  display: none;
+}
+
+.view-section.active {
+  display: block;
+  animation: fadeIn 0.25s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ==========================================================================
+   Metrics Grid & Cards
+   ========================================================================== */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.stat-card {
+  background: var(--kqu-card-bg);
+  border: 1px solid var(--kqu-border);
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+}
+
+.stat-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--kqu-royal-blue);
+}
+
+.stat-card.gold::after {
+  background: var(--kqu-imperial-gold);
+}
+
+.stat-card.success::after {
+  background: var(--kqu-success);
+}
+
+.stat-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.stat-title {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--kqu-text-muted);
+  font-weight: 600;
+}
+
+.stat-icon {
+  font-size: 1.2rem;
+  color: var(--kqu-royal-blue);
+}
+
+.stat-value {
+  font-size: 1.85rem;
+  font-weight: 700;
+  color: var(--kqu-text-main);
+  line-height: 1.2;
+}
+
+.stat-footer {
+  margin-top: 0.5rem;
+  font-size: 0.75rem;
+  color: var(--kqu-text-muted);
+}
+
+/* ==========================================================================
+   Card Component
+   ========================================================================== */
+.card {
+  background: var(--kqu-card-bg);
+  border: 1px solid var(--kqu-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 1.5rem;
+  overflow: hidden;
+}
+
+.card-header {
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--kqu-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  background-color: #FAFAFA;
+}
+
+.card-title {
+  font-family: var(--font-heading);
+  font-size: 1.05rem;
+  color: var(--kqu-royal-blue);
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.card-body {
+  padding: 1.25rem;
+}
+
+/* ==========================================================================
+   Filter & Search Bars
+   ========================================================================== */
+.filter-bar {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.search-input {
+  flex: 1;
+  min-width: 240px;
+  padding: 0.55rem 0.85rem;
+  border: 1px solid var(--kqu-border);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  outline: none;
+  transition: border-color 0.15s ease;
+}
+
+.search-input:focus {
+  border-color: var(--kqu-royal-blue);
+  box-shadow: 0 0 0 2px rgba(15, 37, 87, 0.1);
+}
+
+.select-dropdown {
+  padding: 0.55rem 0.85rem;
+  border: 1px solid var(--kqu-border);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  background-color: #FFFFFF;
+  outline: none;
+  cursor: pointer;
+}
+
+.select-dropdown:focus {
+  border-color: var(--kqu-royal-blue);
+}
+
+/* ==========================================================================
+   Tables
+   ========================================================================== */
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.kqu-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+  text-align: left;
+}
+
+.kqu-table th {
+  background-color: #F8FAFC;
+  color: var(--kqu-text-muted);
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--kqu-border);
+}
+
+.kqu-table td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--kqu-border);
+  color: var(--kqu-text-main);
+  vertical-align: middle;
+}
+
+.kqu-table tbody tr:hover {
+  background-color: #F8FAFC;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.2rem 0.55rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.badge-success {
+  background-color: var(--kqu-success-bg);
+  color: var(--kqu-success);
+}
+
+.badge-danger {
+  background-color: var(--kqu-danger-bg);
+  color: var(--kqu-danger);
+}
+
+.badge-warning {
+  background-color: var(--kqu-warning-bg);
+  color: var(--kqu-warning);
+}
+
+.badge-neutral {
+  background-color: #E2E8F0;
+  color: var(--kqu-text-main);
+}
+
+/* ==========================================================================
+   Attendance Status Buttons
+   ========================================================================== */
+.attendance-actions {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.att-btn {
+  border: 1px solid var(--kqu-border);
+  background: #FFFFFF;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.15s ease;
+}
+
+.att-btn.present.active {
+  background-color: var(--kqu-success);
+  color: #FFFFFF;
+  border-color: var(--kqu-success);
+}
+
+.att-btn.absent.active {
+  background-color: var(--kqu-danger);
+  color: #FFFFFF;
+  border-color: var(--kqu-danger);
+}
+
+.att-btn.late.active {
+  background-color: var(--kqu-warning);
+  color: #FFFFFF;
+  border-color: var(--kqu-warning);
+}
+
+.att-btn.excused.active {
+  background-color: var(--kqu-royal-blue);
+  color: #FFFFFF;
+  border-color: var(--kqu-royal-blue);
+}
+
+/* ==========================================================================
+   Mark Sheet Inputs
+   ========================================================================== */
+.mark-input {
+  width: 70px;
+  padding: 0.35rem 0.5rem;
+  border: 1px solid var(--kqu-border);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  text-align: center;
+  font-weight: 600;
+}
+
+.mark-input:focus {
+  border-color: var(--kqu-royal-blue);
+  outline: none;
+}
+
+/* ==========================================================================
+   Student ID & Academic Transcript Styles
+   ========================================================================== */
+.student-id-card {
+  background: linear-gradient(135deg, var(--kqu-royal-blue-dark) 0%, var(--kqu-royal-blue) 100%);
+  border: 2px solid var(--kqu-imperial-gold);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  color: #FFFFFF;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: var(--shadow-md);
+}
+
+.student-info-block {
+  display: flex;
+  gap: 1.25rem;
+  align-items: center;
+}
+
+.student-avatar {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  border: 3px solid var(--kqu-imperial-gold);
+  background-color: rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--kqu-imperial-gold);
+}
+
+.student-meta h2 {
+  font-family: var(--font-heading);
+  font-size: 1.35rem;
+  color: #FFFFFF;
+}
+
+.student-reg {
+  color: var(--kqu-imperial-gold);
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.cgpa-pill {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: var(--radius-md);
+  padding: 1rem 1.5rem;
+  text-align: center;
+}
+
+.cgpa-pill .label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #CBD5E1;
+}
+
+.cgpa-pill .score {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--kqu-imperial-gold);
+  line-height: 1.1;
+}
+
+/* Printable Official Transcript Container */
+.transcript-document {
+  background-color: #FFFFFF;
+  border: 2px solid #CBD5E1;
+  border-radius: var(--radius-md);
+  padding: 2.5rem;
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  background-image: radial-gradient(#F8FAFC 20%, transparent 20%);
+  background-size: 16px 16px;
+}
+
+.transcript-header {
+  text-align: center;
+  border-bottom: 2px double var(--kqu-royal-blue);
+  padding-bottom: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.transcript-header .trans-logo {
+  width: 64px;
+  height: 64px;
+  margin-bottom: 0.5rem;
+}
+
+.transcript-header h2 {
+  font-family: var(--font-heading);
+  font-size: 1.4rem;
+  color: var(--kqu-royal-blue);
+  letter-spacing: 0.05em;
+}
+
+.transcript-header .sub-dept {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--kqu-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.transcript-header .doc-title {
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  color: var(--kqu-imperial-gold);
+  margin-top: 0.5rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.student-bio-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 0.75rem 1.5rem;
+  margin-bottom: 1.5rem;
+  font-size: 0.85rem;
+}
+
+.bio-item {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px dotted #E2E8F0;
+  padding-bottom: 0.25rem;
+}
+
+.bio-label {
+  font-weight: 600;
+  color: var(--kqu-text-muted);
+}
+
+.bio-value {
+  font-weight: 700;
+  color: var(--kqu-text-main);
+}
+
+.transcript-signatures {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #E2E8F0;
+}
+
+.sig-block {
+  text-align: center;
+  min-width: 180px;
+}
+
+.sig-line {
+  border-bottom: 1px solid var(--kqu-text-main);
+  margin-bottom: 0.4rem;
+}
+
+.sig-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--kqu-text-muted);
+}
+
+/* ==========================================================================
+   Modal Dialog
+   ========================================================================== */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(11, 15, 25, 0.6);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 1rem;
+}
+
+.modal-overlay.active {
+  display: flex;
+}
+
+.modal-box {
+  background-color: #FFFFFF;
+  border-radius: var(--radius-md);
+  max-width: 500px;
+  width: 100%;
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+  animation: modalPop 0.2s ease-out;
+}
+
+@keyframes modalPop {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.modal-header {
+  background: var(--kqu-royal-blue);
+  color: #FFFFFF;
+  padding: 1rem 1.25rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-header h3 {
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  color: #FFFFFF;
+  font-size: 1.25rem;
+  cursor: pointer;
+}
+
+.modal-body {
+  padding: 1.25rem;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-label {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--kqu-text-main);
+  margin-bottom: 0.35rem;
+}
+
+.form-control {
+  width: 100%;
+  padding: 0.55rem 0.75rem;
+  border: 1px solid var(--kqu-border);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  outline: none;
+}
+
+.form-control:focus {
+  border-color: var(--kqu-royal-blue);
+  box-shadow: 0 0 0 2px rgba(15, 37, 87, 0.1);
+}
+
+.modal-footer {
+  padding: 0.75rem 1.25rem;
+  background-color: #F8FAFC;
+  border-top: 1px solid var(--kqu-border);
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+
+/* ==========================================================================
+   Notification Toasts
+   ========================================================================== */
+.toast-container {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 2000;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.toast {
+  background: var(--kqu-obsidian);
+  color: #FFFFFF;
+  padding: 0.75rem 1.25rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+  box-shadow: var(--shadow-lg);
+  border-left: 4px solid var(--kqu-imperial-gold);
+  animation: slideToast 0.3s ease-out;
+}
+
+@keyframes slideToast {
+  from { transform: translateX(100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+.kqu-footer {
+  background-color: var(--kqu-obsidian);
+  color: #94A3B8;
+  padding: 1.5rem;
+  font-size: 0.8rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  margin-top: auto;
+}
+
+.footer-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+/* ==========================================================================
+   Print Rules (For Official Academic Transcript)
+   ========================================================================== */
+@media print {
+  body {
+    background-color: #FFFFFF;
+    color: #000000;
+  }
+  .kqu-header, .demo-role-bar, .card-header button, .btn, .filter-bar, .modal-overlay, .toast-container, .kqu-footer {
+    display: none !important;
+  }
+  .main-content {
+    margin: 0;
+    padding: 0;
+    max-width: 100%;
+  }
+  .view-section {
+    display: none !important;
+  }
+  #student-view {
+    display: block !important;
+  }
+  .student-id-card {
+    display: none !important;
+  }
+  .transcript-document {
+    border: none;
+    box-shadow: none;
+    padding: 0;
+  }
+}
+
+/* ==========================================================================
+   Admin Sub-Navigation & Enhanced Controls
+   ========================================================================== */
+.admin-subnav {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+  border-bottom: 2px solid var(--kqu-border);
+  padding-bottom: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.admin-subnav-btn {
+  background: #FFFFFF;
+  border: 1px solid var(--kqu-border);
+  border-radius: var(--radius-sm);
+  padding: 0.5rem 1rem;
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  color: var(--kqu-text-main);
+  transition: all 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.admin-subnav-btn:hover {
+  background-color: #F1F5F9;
+  border-color: #CBD5E1;
+}
+
+.admin-subnav-btn.active {
+  background: var(--kqu-royal-blue);
+  color: #FFFFFF;
+  border-color: var(--kqu-royal-blue);
+  box-shadow: 0 2px 4px rgba(15, 37, 87, 0.2);
+}
+
+.admin-subnav-btn.active span.count-badge {
+  background: var(--kqu-imperial-gold);
+  color: var(--kqu-obsidian);
+}
+
+.count-badge {
+  background: #E2E8F0;
+  color: var(--kqu-text-main);
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 0.1rem 0.45rem;
+  border-radius: 9999px;
+}
+
+/* Attendance Marking Pill Buttons */
+.att-btn-group {
+  display: inline-flex;
+  gap: 0.25rem;
+}
+
+.btn-att {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.72rem;
+  font-family: var(--font-body);
+  border-radius: 4px;
+  border: 1px solid var(--kqu-border);
+  background: #FFFFFF;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.15s ease;
+}
+
+.btn-att:hover {
+  border-color: #94A3B8;
+}
+
+.btn-att.present.active {
+  background: #DCFCE7;
+  color: #15803D;
+  border-color: #86EFAC;
+}
+
+.btn-att.absent.active {
+  background: #FEE2E2;
+  color: #B91C1C;
+  border-color: #FCA5A5;
+}
+
+.btn-att.late.active {
+  background: #FEF3C7;
+  color: #B45309;
+  border-color: #FDE68A;
+}
+
+.btn-att.excused.active {
+  background: #E0E7FF;
+  color: #3730A3;
+  border-color: #A5B4FC;
+}
+
+/* Pagination Bar */
+.pagination-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 1rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--kqu-border);
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  font-size: 0.8rem;
+  color: var(--kqu-text-muted);
+}
+
+.pagination-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.pagination-controls button {
+  padding: 0.3rem 0.65rem;
+  font-size: 0.75rem;
+  border: 1px solid var(--kqu-border);
+  border-radius: var(--radius-sm);
+  background: #FFFFFF;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.15s ease;
+}
+
+.pagination-controls button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.pagination-controls button:not(:disabled):hover {
+  background-color: #F1F5F9;
+  border-color: #94A3B8;
+}
+
+/* Faculty Grid */
+.faculty-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.25rem;
+}
+
+.faculty-card {
+  background: #FFFFFF;
+  border: 1px solid var(--kqu-border);
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.faculty-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+}
+
+.faculty-code-tag {
+  background-color: var(--kqu-royal-blue);
+  color: var(--kqu-imperial-gold);
+  font-family: monospace;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+}
+
+.faculty-name {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--kqu-royal-blue);
+  margin-bottom: 0.25rem;
+}
+
+.faculty-dean {
+  font-size: 0.8rem;
+  color: var(--kqu-warning);
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+
+.program-list {
+  list-style: none;
+  font-size: 0.78rem;
+  color: var(--kqu-text-main);
+  max-height: 180px;
+  overflow-y: auto;
+  border-top: 1px dashed var(--kqu-border);
+  padding-top: 0.5rem;
+}
+
+.program-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.3rem 0;
+  border-bottom: 1px solid #F1F5F9;
+}
+
+.program-item:last-child {
+  border-bottom: none;
+}
+
+.program-badge {
+  font-size: 0.68rem;
+  background-color: #F1F5F9;
+  color: var(--kqu-text-muted);
+  padding: 0.1rem 0.4rem;
+  border-radius: 4px;
+  font-family: monospace;
+  white-space: nowrap;
+}
